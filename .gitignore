@@ -1,0 +1,6 @@
+sandbox
+*.env*
+!*example.env*
+*.code-workspace
+slave/build
+master/build
