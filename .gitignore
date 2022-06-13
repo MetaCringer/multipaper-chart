@@ -4,3 +4,4 @@ sandbox
 *.code-workspace
 slave/build
 master/build
+*test.values.yaml

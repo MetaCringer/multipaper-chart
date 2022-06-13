@@ -1,0 +1,8 @@
+master:
+  image: watermelon.jfrog.io/default-docker-local/mc_master
+  tag: v1
+slave:
+  image: "watermelon.jfrog.io/default-docker-local/mc_slave"
+  tag: v1
+  replicas: 2
+dockerconfigjson: watermelon-dcj
