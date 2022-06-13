@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: mc-master
+  labels: 
+    app: mc-master
+spec: 
+  selector:
+    matchLabels:
+      app: mc-master
+  template:
+    metadata:
+      labels:
+        app: mc-master
+    spec:
+      containers:
+      - name: master
+        image: {{ .Values.master.image }}:{{ .Values.master.tag }}
+        ports:
+        - containerPort: 25565
+        - containerPort: 35353
+        volumeMounts:
+        - name: config-volume
+          mountPath: "/app/velocity.toml"
+          subPath: "velocity.toml"
+      imagePullSecrets:
+      - name: {{ .Values.dockerconfigjson }}
+      volumes:
+      - name: config-volume
+        configMap:
+          name: master-configmap
+{{- $repl := ( int .Values.slave.replicas ) -}}
+{{- $slaveimg := tpl "{{ .Values.slave.image }}:{{ .Values.slave.tag }}" . -}}
+{{- $dcj := .Values.dockerconfigjson -}}
+{{range $i, $e := until $repl }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: mc-slave-{{$i}}
+  labels: 
+    app: mc-slave-{{$i}}
+spec: 
+  selector:
+    matchLabels:
+      app: mc-slave-{{$i}}
+  template:
+    metadata:
+      labels:
+        app: mc-slave-{{$i}}
+    spec:
+      containers:
+      - name: slave
+        image: "{{ $slaveimg }}"
+        ports:
+        - containerPort: 25565
+        env:
+        - name: server_name
+          value: slave{{$i}}
+        - name: master_address
+          value: mc-master
+      imagePullSecrets:
+      - name: {{ $dcj }}
+{{end}}
