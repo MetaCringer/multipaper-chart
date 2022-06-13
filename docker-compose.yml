@@ -10,15 +10,11 @@ services:
       - server_name=slave0
     depends_on:
     - master
-    ports:
-    - "25566:25565"
   slave1:
     build: slave
     environment:
       - server_name=slave1
     depends_on:
     - master
-    ports:
-    - "25567:25565"
 
   

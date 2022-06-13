@@ -9,8 +9,10 @@ WORKDIR  /app
 
 COPY velocity*.jar velocity.jar
 COPY velocity.toml .
-COPY build/MultiPaper-Master*.jar ./plugins/MultiPaper-Master.jar
+ARG master_jar_url=https://multipaper.io/api/v2/projects/multipaper/versions/1.18.2/builds/70/downloads/MultiPaper-Master-2.8.4-all.jar
 RUN  \
+  mkdir plugins && \
+  curl -o plugins/MultiPaper-Master.jar ${master_jar_url} && \
   chown 1001:1001 -R ./
 USER velocity
 EXPOSE 25565

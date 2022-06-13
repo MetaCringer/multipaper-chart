@@ -3,6 +3,5 @@
 java \
     -DbungeecordName=${server_name} \
     -DmultipaperMasterAddress=${master_address}:35353 \
-    -Dpaper.settings.proxy-protocol=true \
     -Dproperties.online-mode=false \
     -jar multipaper.jar

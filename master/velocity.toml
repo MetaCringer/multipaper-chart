@@ -50,7 +50,7 @@ kick-existing-players = false
 #                  description and mod list.
 # - "all":         Uses the backend server's response as the proxy response. The Velocity
 #                  configuration is used if no servers could be contacted.
-ping-passthrough = "disabled"
+ping-passthrough = "DISABLED"
 # If not enabled (default is true) player IP addresses will be replaced by <ip address withheld> in logs
 enable-player-address-logging = true
 
@@ -64,7 +64,7 @@ enable-player-address-logging = true
 [advanced]
 	# How large a Minecraft packet has to be before we compress it. Setting this to zero will
 	# compress all packets, and setting it to -1 will disable compression entirely.
-	compression-threshold = 256
+	compression-threshold = 0
 	# How much compression should be done (from 0-9). The default is -1, which uses the
 	# default level of 6.
 	compression-level = -1
