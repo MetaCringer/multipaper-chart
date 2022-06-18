@@ -5,7 +5,7 @@ show-max-players = 500
 online-mode = false
 prevent-client-proxy-connections = false
 player-info-forwarding-mode = "modern"
-forwarding-secret = "F5Uotbw4tlIl"
+forwarding-secret = "{{ .Values.velocity_secret }}"
 announce-forge = false
 kick-existing-players = false
 ping-passthrough = "DISABLED"
@@ -14,10 +14,10 @@ enable-player-address-logging = true
 
 [servers]
 	{{range $i, $e := until (int .Values.slave.replicas)}}
-	slave{{$i}} = "mc-slave-{{$i}}:25565"
+	mc-slave-{{$i}} = "mc-slave-{{$i}}:25565"
 	{{end}}
 	{{ $myList := list }} 
-	{{- range $i, $e := until (int .Values.slave.replicas) -}} {{- $myList = append $myList (printf "\"slave%d\"" $i ) -}} {{- end }}
+	{{- range $i, $e := until (int .Values.slave.replicas) -}} {{- $myList = append $myList (printf "\"mc-slave-%d\"" $i ) -}} {{- end }}
 	try = [{{- join "," $myList -}}]
 	
 

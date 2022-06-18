@@ -9,10 +9,7 @@ advertiseToBuiltInProxy: true
 syncScoreboards: true
 logFileSyncing: true
 filesToSyncOnStartup:
-- paper.yml
-- multipaper.yml
-- spigot.yml
-- bukkit.yml
+- txt
 filesToSyncInRealTime:
 - plugins/MyPluginDirectory
 filesToOnlyUploadOnServerStop:

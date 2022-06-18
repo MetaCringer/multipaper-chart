@@ -4,17 +4,23 @@ services:
     build: master
     ports:
     - "25565:25565"
+    volumes:
+      - vmaster:/pv/
   slave0:
     build: slave
     environment:
       - server_name=slave0
+      - velocity_secret=F5Uotbw4tlIl
     depends_on:
     - master
   slave1:
     build: slave
     environment:
       - server_name=slave1
+      - velocity_secret=F5Uotbw4tlIl
     depends_on:
     - master
+volumes:
+  vmaster:
 
   

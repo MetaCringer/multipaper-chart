@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: mc-master
 spec:
+  clusterIP: "None"
   selector:
     app: mc-master
   ports:
@@ -22,6 +23,7 @@ kind: Service
 metadata:
   name: mc-slave-{{$i}}
 spec:
+  clusterIP: "None"
   selector:
     app: mc-slave-{{$i}}
   ports:

@@ -13,7 +13,9 @@ ARG master_jar_url=https://multipaper.io/api/v2/projects/multipaper/versions/1.1
 RUN  \
   mkdir plugins && \
   curl -o plugins/MultiPaper-Master.jar ${master_jar_url} && \
-  chown 1001:1001 -R ./
+  mkdir /pv && \
+  chown 1001:1001 -R ./ /pv/
+WORKDIR /pv
 USER velocity
 EXPOSE 25565
 EXPOSE 35353
